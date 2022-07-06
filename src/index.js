@@ -4,12 +4,17 @@ import App from './App';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css"
 
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}>
     <BrowserRouter>
        <Routes>
            <Route exact path="/*" element={ <App />} />
        </Routes>
     </BrowserRouter>
+    </Provider>
 );
 
