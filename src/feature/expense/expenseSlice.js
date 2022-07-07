@@ -28,6 +28,10 @@ export const expenseSlice = createSlice({
         },
         setExpenseBudget(state,action){
             state.budget = action.payload;
+        },
+        deleteExpense(state,action){
+            const expenses = state.expenseList.filter(expense => expense.id !== action.payload);
+            state.expenseList = expenses;
         }
     }
 });
@@ -37,5 +41,5 @@ export const getAllExpenses = (state) => state.expenses.expenseList;
 export const getBudgetId = (state) => state.expenses.budgetId;
 export const getBudget = (state) =>state.expenses.budget;
 
-export const {setExpense,getBudgetExpenses,setBudgetId,setExpenseBudget} = expenseSlice.actions
+export const {setExpense,getBudgetExpenses,setBudgetId,setExpenseBudget,deleteExpense} = expenseSlice.actions
 export default expenseSlice.reducer;

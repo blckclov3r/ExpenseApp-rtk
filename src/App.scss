@@ -1,0 +1,20 @@
+body{
+  	font-family: 'Open Sans', sans-serif;
+	background: #f1f1f1;
+	background-image: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.4)),url('https://raw.githubusercontent.com/blckclov3r/blckclov3r.github.io/master/public/bgslash.webp');
+	background-size: auto;
+}
+
+/* The following block can be included in a custom.scss */
+
+/* make the customizations */
+$theme-colors: (
+	"primary": #006699,
+	"warning": orange,
+	"success": #166c4e,
+    "info": teal,
+    "danger": rgb(190, 50, 50)
+);
+
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";

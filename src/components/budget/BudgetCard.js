@@ -31,7 +31,7 @@ export default function BudgetCard({name,max,amount,showExpenseModal,viewExpense
                     </div>
                     <div className='d-flex justify-content-between mt-3'>
                         <button className='btn btn-outline-primary' onClick={showExpenseModal} >Add Expense</button>
-                        <button className='btn btn-outline-secondary' onClick={viewExpenseModal}>View Expense</button>
+                        <button className='btn btn-info' onClick={viewExpenseModal}>View Expense</button>
                     </div>
                 </div>
             </div>

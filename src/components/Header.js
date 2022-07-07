@@ -21,15 +21,20 @@ export default function Header() {
       
       <>
         <div className='container py-4'>
-         <div className='d-flex justify-content-between align-items-center'>
+          <div className='col-md-8'>
+          <div className='d-flex justify-content-between align-items-center'>
             <div>
               <h1>Expense App</h1>
             </div>
             <div>
                 <button className='btn btn-primary' onClick={handleShowBudgetModal}>Add Budget</button>
-                <button className='btn btn-warning ms-2' onClick={handleShowExpenseModal}>Add Expense</button>
+                <button className='btn btn-success ms-2' onClick={handleShowExpenseModal}>Add Expense</button>
             </div>
          </div>
+          </div>
+          <div className='col-md-4'>
+            
+          </div>
       </div>
 
       
