@@ -7,13 +7,13 @@ const initialState = {
 }
 
 export const modalSlice  = createSlice({
-    name: "budgetModal",
+    name: "expenseModal",
     initialState,
     reducers: {
-        budgetShow: (state,action)=>{
+        expenseShow: (state,action)=>{
             state.show = action.payload
         },
-        budgetClose: (state,action)=>{
+        expenseClose: (state,action)=>{
             state.close = action.payload;
             state.show = false;
         },
@@ -22,12 +22,12 @@ export const modalSlice  = createSlice({
 });
 
 
-// this (budgetModal) located under source directory app > storejs
-export const getShowBudgetModal = (state) => state.budgetModal.show;
+// this (expenseModal) located under source directory app > storejs
+export const getShowExpenseModal = (state) => state.expenseModal.show;
 
-export const getClose = (state) => state.budgetModal.close;
+export const getClose = (state) => state.expenseModal.close;
 
 // the purpose of this line of code is to update the state using dispatch
-export const {budgetShow,budgetClose} = modalSlice.actions
+export const {expenseShow,expenseClose} = modalSlice.actions
 
 export default modalSlice.reducer

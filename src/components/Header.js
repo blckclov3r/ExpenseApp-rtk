@@ -1,15 +1,21 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import {budgetShow } from '../feature/budget/modalSlice';
+import { setBudgetId } from '../feature/expense/expenseSlice';
+import { expenseShow } from '../feature/expense/modalSlice';
 
 export default function Header() {
+
   const dispatch = useDispatch();
 
-
-
-  const handleShow = ()=>{
-    dispatch(budgetShow(true))
+  const handleShowBudgetModal = ()=>{
+    dispatch(budgetShow(true));
   }
+  
+  const handleShowExpenseModal = () =>{
+    dispatch(expenseShow(true));
+    dispatch(setBudgetId('uncategorized'));
+  } 
 
   return (
       
@@ -20,8 +26,8 @@ export default function Header() {
               <h1>Expense App</h1>
             </div>
             <div>
-                <button className='btn btn-primary' onClick={handleShow}>Add Budget</button>
-                <button className='btn btn-warning ms-2'>Add Expense</button>
+                <button className='btn btn-primary' onClick={handleShowBudgetModal}>Add Budget</button>
+                <button className='btn btn-warning ms-2' onClick={handleShowExpenseModal}>Add Expense</button>
             </div>
          </div>
       </div>
