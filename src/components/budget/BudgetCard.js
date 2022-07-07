@@ -1,10 +1,9 @@
 import React from 'react'
 import { currencyFormatter } from '../../utils'
 
-export default function BudgetCard({id,name,max,amount,showExpenseModal}) {
-    
+export default function BudgetCard({name,max,amount,showExpenseModal,viewExpenseModal}) {
+
     const percentage = ((amount / max) * 100)
-    console.log(percentage)
     const getProgressBarColor = (amount,max)=>{
         const ratio = amount / max;
         if(ratio < 0.5){
@@ -15,7 +14,6 @@ export default function BudgetCard({id,name,max,amount,showExpenseModal}) {
         }
         return 'bg-danger'
     }
-    console.log(percentage)
     return (
         <>
             <div className="card">
@@ -33,7 +31,7 @@ export default function BudgetCard({id,name,max,amount,showExpenseModal}) {
                     </div>
                     <div className='d-flex justify-content-between mt-3'>
                         <button className='btn btn-outline-primary' onClick={showExpenseModal} >Add Expense</button>
-                        <button className='btn btn-outline-secondary'>View Expense</button>
+                        <button className='btn btn-outline-secondary' onClick={viewExpenseModal}>View Expense</button>
                     </div>
                 </div>
             </div>
