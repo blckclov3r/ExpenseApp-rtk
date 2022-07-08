@@ -27,8 +27,8 @@ export default function Header() {
       <>
         <div className='container py-4'>
           <div className='row justify-content-center'>
-          <div className='col-8'>
-          <div className='d-flex justify-content-between align-items-center flex-wrap'>
+          <div className='col-12 col-md-8'>
+          <div className='d-flex justify-content-between align-items-center flex-wrap gap-2'>
         
             <div>
             <h1 className='mb-0'>Expense App
