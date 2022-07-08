@@ -46,7 +46,18 @@ export default function Home() {
     const max = maxRef.current.value;
     const pass = [name, max].every(Boolean);
 
+    const result = budgets.find((budget)=> budget.name === name);
+    if(result){
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'Budget name is already exist!',
+      })
+      return;
+    }
+
     if (pass) {
+
       Swal.fire({
         title: 'Are you sure?',
         text: "You want to add this budget",

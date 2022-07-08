@@ -14,7 +14,6 @@ export const budgetSlice = createSlice({
                 state.budgetList = [...state.budgetList,action.payload];
             }
         },
-
         deleteBudgetId: (state,action) =>{
             const budget =  state.budgetList.filter((budget)=>budget.id !== action.payload);
             state.budgetList = budget;
