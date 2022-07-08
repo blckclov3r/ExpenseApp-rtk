@@ -20,7 +20,6 @@ export default function TotalBudgetCard() {
         return expense.budgetId !== "uncategorized";
     })
     const expenseTotal = filterExpenses.reduce((total,expense)=>total+Number(expense.amount),0);
-    console.log(expenseTotal)
 
     const percentage = ((expenseTotal / maxTotal) * 100)
     const getProgressBarColor = (amount,max)=>{

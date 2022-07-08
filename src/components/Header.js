@@ -26,6 +26,7 @@ export default function Header() {
       
       <>
         <div className='container py-4'>
+          <div className='row justify-content-center'>
           <div className='col-md-8'>
           <div className='d-flex justify-content-between align-items-center flex-wrap'>
         
@@ -36,9 +37,8 @@ export default function Header() {
             </div>
          </div>
           </div>
-          <div className='col-md-4'>
-
           </div>
+         
       </div>
 
       
