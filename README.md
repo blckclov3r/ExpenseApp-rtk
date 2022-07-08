@@ -2,6 +2,11 @@
 
 ### <a href="https://expenseapprtk.netlify.app">DEMO</a>
 
+
+![expenseapp](https://user-images.githubusercontent.com/43292234/178074697-039c44ac-a585-46fd-835a-e3f2009bf77e.PNG)
+
+![expenseapp2](https://user-images.githubusercontent.com/43292234/178074429-807ab3a3-bcd4-4f18-9121-3b6a8f068069.PNG)
+
 <br/><br/>
 
 # Getting Started with Create React App
