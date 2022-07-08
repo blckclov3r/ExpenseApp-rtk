@@ -133,13 +133,13 @@ export default function Index() {
             <div className='collectionList'>
               {
                 budgets?.map((budget => {
-                  const amount = expenses.filter(expense => expense.budgetId === budget.id)
+                  const amount = expenses?.filter(expense => expense.budgetId === budget.id)
                     .reduce((total, expense) => total + expense.amount, 0)
 
                   return <BudgetCard {...budget} key={budget.id} amount={amount ? amount : 0}
 
                     viewExpenseModal={(e) => {
-                      const result = budgets.find(x => x.id === budget.id);
+                      const result = budgets?.find(x => x.id === budget.id);
                       dispatch(expenseView(true));
                       dispatch(setExpenseBudget(result))
                     }}
@@ -264,7 +264,7 @@ export default function Index() {
           }</h6>
           <ul className="list-group">
             {
-              expenses?.filter((expense) => expense.budgetId === budget?.id).map((expense) => (
+              expenses?.filter((expense) => expense?.budgetId === budget?.id).map((expense) => (
                 <li key={expense.id} className='py-2 shadow-sm list-group-item d-flex mb-2 justify-content-between align-items-center'>
                   <div style={{ fontSize: '1.1rem' }}>Desc: <span className="text-info fw-bold">{expense.desc} </span>|  Amount:<span className="text-primary fw-bold"> {currencyFormatter.format(expense.amount)}</span></div>
                   <button className="btn btn-danger" onClick={() => {
