@@ -97,6 +97,7 @@ export default function Home() {
 
 
   const addExpenseFn = (e) => {
+    e.preventDefault();
     const desc = descRef.current.value;
     const amount = Number(amountRef.current.value);
     const budgetId = budgetIdRef.current.value;
@@ -110,7 +111,12 @@ export default function Home() {
         amount,
         budgetId
       }));
-      dispatch(expenseClose(true))
+      dispatch(expenseClose(true));
+      Swal.fire(
+        'Success!',
+        `New expense with description: ${desc}, has been added.`,
+        'success'
+      )
     } else {
       return;
     }
@@ -123,7 +129,6 @@ export default function Home() {
   const showExpenseModal = useSelector(getShowExpenseModal);
   const viewExpenseModal = useSelector(getViewExpenseModal);
 
-
   const showBudgetModal = useSelector(getShowBudgetModal);
   const budgets = useSelector(getAllBudgets);
 
@@ -133,8 +138,6 @@ export default function Home() {
   // filter method  will return an array object
   // const test = expenses.filter(expense => expense.budgetId === 'r5JOkVpPhMcyfKF16mQKF');
   // console.log(test)
-
-
 
   return (
     <>
@@ -231,6 +234,7 @@ export default function Home() {
         <Modal.Header closeButton>
           <Modal.Title>New Expense</Modal.Title>
         </Modal.Header>
+        <form onSubmit={addExpenseFn}>
         <Modal.Body>
           <div className='form-group mb-3'>
             <label className='form-label'>Description</label>
@@ -255,13 +259,14 @@ export default function Home() {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleExpenseClose}>
+          <Button variant="secondary" type="button" onClick={handleExpenseClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={addExpenseFn}>
+          <Button variant="primary" type="submit">
             Add
           </Button>
         </Modal.Footer>
+        </form>
       </Modal>
 
       {/* viewExpenseModal */}
