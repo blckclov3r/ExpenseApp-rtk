@@ -1,5 +1,5 @@
 import "./home.scss"
-import BudgetCard from '../Budget/BudgetCard'
+import BudgetCard from "../budget/BudgetCard";
 import TotalBudgetCard from '../Budget/TotalBudgetCard'
 
 import { Button, Modal } from 'react-bootstrap';

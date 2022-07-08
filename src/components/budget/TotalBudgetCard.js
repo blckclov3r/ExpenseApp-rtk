@@ -1,4 +1,3 @@
-import React from 'react'
 import {  useSelector } from 'react-redux'
 import { getAllBudgets } from '../../feature/budget/budgetSlice';
 import { getAllExpenses } from '../../feature/expense/expenseSlice';

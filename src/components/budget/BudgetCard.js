@@ -1,4 +1,3 @@
-import React from 'react'
 import { currencyFormatter } from '../../utils'
 
 export default function BudgetCard({ name, max, amount, showExpenseModal, viewExpenseModal,deleteBudget }) {
@@ -14,7 +13,6 @@ export default function BudgetCard({ name, max, amount, showExpenseModal, viewEx
         return 'bg-danger'
     }
     return (
-        <>
             <div className="card" style={{borderLeft: '6px solid #006699'}}>
                 <div className="card-body">
                     <h4 className="card-title d-flex justify-content-between align-items-baseline">
@@ -59,7 +57,6 @@ export default function BudgetCard({ name, max, amount, showExpenseModal, viewEx
                     </div>
                 </div>
             </div>
-        </>
 
 
     )
