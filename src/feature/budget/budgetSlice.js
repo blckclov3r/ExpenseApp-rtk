@@ -1,9 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-    
-
-
 export const budgetSlice = createSlice({
     name: "budget",
     initialState: {
@@ -11,12 +8,26 @@ export const budgetSlice = createSlice({
     },
     reducers: {
         setBudget: (state,action)=> {
-            state.budgetList.push(action.payload);
+            let existed = state.budgetList.find(item => item.name === action.payload.name)
+            // if status is false | not exist it will return false
+            if(!existed){
+                state.budgetList = [...state.budgetList,action.payload];
+            }
+        },
+
+        deleteBudgetId: (state,action) =>{
+            const budget =  state.budgetList.filter((budget)=>budget.id !== action.payload);
+            state.budgetList = budget;
         }
     }
 });
 
 export const getAllBudgets = (state) => state.budgets.budgetList;
 
-export const {setBudget} = budgetSlice.actions
+export const getTotalMax = (state) => state.budgets.budgetList.reduce((total,budget)=>{
+    return total + Number(budget.max);
+  },0);
+
+
+export const {setBudget,deleteBudgetId} = budgetSlice.actions
 export default budgetSlice.reducer

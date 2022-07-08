@@ -9,10 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRef } from 'react';
 
 import { budgetClose, getShowBudgetModal } from '../../feature/budget/modalSlice';
-import { setBudget, getAllBudgets } from '../../feature/budget/budgetSlice';
+import { setBudget, getAllBudgets, deleteBudgetId } from '../../feature/budget/budgetSlice';
 
 import { expenseClose, expenseShow, expenseView, getShowExpenseModal, getViewExpenseModal, viewExpenseClose } from "../../feature/expense/modalSlice";
-import { deleteExpense, getAllExpenses, getBudget, getBudgetId, setBudgetId, setExpense, setExpenseBudget } from '../../feature/expense/expenseSlice';
+import { deleteExpense, deleteExpensesId, getAllExpenses, getBudget, getBudgetId, setBudgetId, setExpense, setExpenseBudget } from '../../feature/expense/expenseSlice';
+
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 export default function Index() {
 
@@ -58,15 +60,16 @@ export default function Index() {
 
   }
 
-
-  const addExpenseFn = () => {
+  
+  
+  const addExpenseFn = (e) => {
     const desc = descRef.current.value;
     const amount = Number(amountRef.current.value);
     const budgetId = budgetIdRef.current.value;
 
-    const pass = [desc, amount, budgetId].every(Boolean);
-
-    if (pass) {
+    const pass = [desc, amount].every(Boolean);
+    const optBudget = budgetId !== "uncategorized";
+    if (pass && optBudget) {
       dispatch(setExpense({
         id: nanoid(),
         desc,
@@ -74,6 +77,8 @@ export default function Index() {
         budgetId
       }));
       dispatch(expenseClose(true))
+    }else{
+      return;
     }
 
 
@@ -96,9 +101,10 @@ export default function Index() {
   // console.log(test)
 
   const deleteExpenseFn = (id) =>{
-
     dispatch(deleteExpense(id))
   }
+
+
 
   return (
     <>
@@ -119,6 +125,29 @@ export default function Index() {
                   dispatch(setExpenseBudget(result))
                 }}
 
+                deleteBudget={()=>{
+                  Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      dispatch(deleteBudgetId(budget.id));
+                      dispatch(deleteExpensesId(budget.id))
+                      Swal.fire(
+                        'Deleted!',
+                       `budget name ${budget.name} has been deleted.`,
+                        'success'
+                      )
+                    }
+                  })
+               
+                }}
+
                 showExpenseModal={(e) => {
                   dispatch(expenseShow(true));
                   dispatch(setBudgetId(budget.id));
@@ -127,7 +156,11 @@ export default function Index() {
 
           }
 
-           <TotalBudgetCard />
+         { (budgets.length > 0) && <TotalBudgetCard />}
+
+       
+
+
         </div>
               </div>
               <div className="col-md-4">
@@ -136,7 +169,7 @@ export default function Index() {
           </div>
       </div>
 
-
+ 
 
       {/* budgetModal */}
       <Modal show={showBudgetModal} onHide={handleBudgetClose} backdrop="static">
@@ -157,7 +190,7 @@ export default function Index() {
           <Button variant="secondary" onClick={handleBudgetClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={addBudgetFn}>
+          <Button variant="primary"  onClick={addBudgetFn}>
             Add
           </Button>
         </Modal.Footer>
@@ -180,12 +213,13 @@ export default function Index() {
           <div className='form-group mb-3'>
             <label className='form-label'>Amount</label>
 
-            <select className="form-select" defaultValue={budgetId ? budgetId : 'uncategorized'} ref={budgetIdRef}>
-              <option value='uncategorized'>Uncategorized</option>
+            <select  className="form-select" defaultValue={budgetId ? budgetId : 'uncategorized'} ref={budgetIdRef}>
+              <option value='uncategorized' >Uncategorized</option>
               {
-                budgets?.map((budget => (
+                budgets.map((budget => (
                   <option key={budget.id} value={budget.id} >{budget.name}</option>
                 )))
+
               }
             </select>
           </div>
@@ -194,7 +228,7 @@ export default function Index() {
           <Button variant="secondary" onClick={handleExpenseClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={addExpenseFn}>
+          <Button variant="primary"  onClick={addExpenseFn}>
             Add
           </Button>
         </Modal.Footer>
@@ -206,16 +240,40 @@ export default function Index() {
           <Modal.Title>{budget?.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h6 style={{color: '#777'}} className='ms-1'>{
+              expenses?.find((expense)=>expense.budgetId === budget?.id) ? 'Expenses' : 'No expenses found' 
+          }</h6>
         <ul className="list-group">
               { 
-                expenses?.map((expense)=>(
-                  <li key={expense.id} className='py-2 shadow-sm list-group-item d-flex justify-content-between'>
-                      <span style={{fontSize: '1rem'}}>{expense.desc} - {expense.amount}</span>
-                      <button className="btn btn-outline-none" style={{fontSize: '1rem',color: 'red'}} onClick={()=>{deleteExpenseFn(expense.id)}}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
-              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-              <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-            </svg>
+                expenses?.filter((expense)=>expense.budgetId === budget?.id).map((expense)=>(
+                  <li key={expense.id} className='py-2 shadow-sm list-group-item d-flex mb-2 justify-content-between align-items-center'>
+                      <span style={{fontSize: '1.1rem'}}>{expense.desc} - {expense.amount}</span>
+                      <button className="btn btn-danger" onClick={()=>{
+                            Swal.fire({
+                              title: 'Are you sure?',
+                              text: "You won't be able to revert this!",
+                              icon: 'warning',
+                              showCancelButton: true,
+                              confirmButtonColor: '#3085d6',
+                              cancelButtonColor: '#d33',
+                              confirmButtonText: 'Yes, delete it!'
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                deleteExpenseFn(expense.id)
+                                Swal.fire(
+                                  'Deleted!',
+                                  `Expense desc. ${expense.desc} has been deleted.`,
+                                  'success'
+                                )
+                              }
+                            })
+                        
+                          }
+                        }>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                      <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg>
 
                       </button>
                   </li>

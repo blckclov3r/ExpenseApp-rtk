@@ -10,11 +10,12 @@ body{
 /* make the customizations */
 $theme-colors: (
 	"primary": #006699,
-	"warning": orange,
-	"success": #166c4e,
+	"warning": rgb(255, 158, 22),
+	"success": #299d74,
     "info": teal,
-    "danger": rgb(190, 50, 50)
+    "danger": rgb(202, 71, 71)
 );
 
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";
+
