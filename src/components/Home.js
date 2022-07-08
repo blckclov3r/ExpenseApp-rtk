@@ -1,6 +1,6 @@
 import "./home.scss"
-import BudgetCard from './Budget/BudgetCard'
-import TotalBudgetCard from './Budget/TotalBudgetCard'
+import BudgetCard from './budgets/BudgetCard'
+import TotalBudgetCard from './budgets/TotalBudgetCard'
 
 import { Button, Modal } from 'react-bootstrap';
 import { nanoid } from '@reduxjs/toolkit'
