@@ -282,7 +282,7 @@ export default function Home() {
             {
               expenses?.filter((expense) => expense?.budgetId === budget?.id).map((expense) => (
                 <li key={expense.id} className='py-2 shadow-sm list-group-item d-flex mb-2 justify-content-between align-items-center'>
-                  <div style={{ fontSize: '1.1rem' }}>Desc: <span className="text-info fw-bold">{expense.desc} </span>|  Amount:<span className="text-primary fw-bold"> {currencyFormatter.format(expense.amount)}</span></div>
+                  <div style={{ fontSize: '1.1rem' }}><span className="text-info fw-bold">{expense.desc} </span>|  Amount:<span className="text-primary fw-bold"> {currencyFormatter.format(expense.amount)}</span></div>
                   <button className="btn btn-danger" onClick={() => {
                     Swal.fire({
                       title: 'Are you sure?',
