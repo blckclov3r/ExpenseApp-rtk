@@ -60,7 +60,7 @@ export default function Home() {
 
       Swal.fire({
         title: 'Are you sure?',
-        text: "You want to add this budget",
+        text: `You want to add ${name} to your budget?`,
         icon: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -78,7 +78,7 @@ export default function Home() {
 
           Swal.fire(
             'Success!',
-            'budget successfully added.',
+            `${name} successfully added to your budget list.`,
             'success'
           )
         }
@@ -114,7 +114,7 @@ export default function Home() {
       dispatch(expenseClose(true));
       Swal.fire(
         'Success!',
-        `New expense with description: ${desc}, has been added.`,
+        `${desc} expense, has been added.`,
         'success'
       )
     } else {
@@ -143,7 +143,7 @@ export default function Home() {
     <>
       <div className='container'>
         <div className="row justify-content-center">
-          <div className="col-md-8">
+          <div className="col-8">
             <div className='collectionList'>
               {
                 budgets?.map((budget => {
