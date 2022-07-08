@@ -46,8 +46,8 @@ export default function Home() {
     const max = maxRef.current.value;
     const pass = [name, max].every(Boolean);
 
-    const result = budgets.find((budget)=> budget.name === name);
-    if(result){
+    const budgetNameExist = budgets.find((budget)=> budget.name === name);
+    if(budgetNameExist){
       Swal.fire({
         icon: 'warning',
         title: 'Oops...',
