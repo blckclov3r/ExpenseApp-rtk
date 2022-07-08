@@ -1,19 +1,19 @@
 import "./home.scss"
-import BudgetCard from '../Budget/BudgetCard'
-import TotalBudgetCard from '../Budget/TotalBudgetCard'
+import BudgetCard from './Budget/BudgetCard'
+import TotalBudgetCard from './Budget/TotalBudgetCard'
 
 import { Button, Modal } from 'react-bootstrap';
 import { nanoid } from '@reduxjs/toolkit'
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { budgetClose, getShowBudgetModal } from '../../feature/budget/modalSlice';
-import { setBudget, getAllBudgets, deleteBudgetId } from '../../feature/budget/budgetSlice';
+import { budgetClose, getShowBudgetModal } from '../feature/budget/modalSlice';
+import { setBudget, getAllBudgets, deleteBudgetId } from '../feature/budget/budgetSlice';
 
-import { expenseClose, expenseShow, expenseView, getShowExpenseModal, getViewExpenseModal, viewExpenseClose } from "../../feature/expense/modalSlice";
-import { deleteExpense, deleteExpensesId, getAllExpenses, getBudget, getBudgetId, setBudgetId, setExpense, setExpenseBudget } from '../../feature/expense/expenseSlice';
+import { expenseClose, expenseShow, expenseView, getShowExpenseModal, getViewExpenseModal, viewExpenseClose } from "../feature/expense/modalSlice";
+import { deleteExpense, deleteExpensesId, getAllExpenses, getBudget, getBudgetId, setBudgetId, setExpense, setExpenseBudget } from '../feature/expense/expenseSlice';
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
-import { currencyFormatter } from "../../utils";
+import { currencyFormatter } from "../utils";
 
 export default function Home() {
 

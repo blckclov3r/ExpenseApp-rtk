@@ -4,7 +4,8 @@ import Layout from './components/Layout';
 import NotFound from './components/NotFound';
 
 import 'sweetalert2/src/sweetalert2.scss'
-import Home from './components/Home/Home';
+import Home from './components/Home';
+
 function App() {
   return (
      <Routes>
