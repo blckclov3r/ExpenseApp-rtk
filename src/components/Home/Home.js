@@ -15,7 +15,7 @@ import { deleteExpense, deleteExpensesId, getAllExpenses, getBudget, getBudgetId
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { currencyFormatter } from "../../utils";
 
-export default function Index() {
+export default function Home() {
 
   const dispatch = useDispatch();
 

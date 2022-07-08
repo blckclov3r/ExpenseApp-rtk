@@ -2,8 +2,9 @@
 import {Routes,Route} from 'react-router-dom'
 import Layout from './components/Layout';
 import NotFound from './components/NotFound';
-import Home from './components/Home'
+
 import 'sweetalert2/src/sweetalert2.scss'
+import Home from './components/Home/Home';
 function App() {
   return (
      <Routes>
