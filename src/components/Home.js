@@ -42,16 +42,19 @@ export default function Home() {
 
   const addBudgetFn = (e) => {
     e.preventDefault();
+
     const name = nameRef.current.value;
-    const max = maxRef.current.value;
+    const max = Number(maxRef.current.value);
+
     const pass = [name, max].every(Boolean);
 
-    const budgetNameExist = budgets.find((budget)=> budget.name === name);
-    if(budgetNameExist){
+    const budgetNameExist = budgets.find((budget) => (budget.name).toLowerCase() === name.toLowerCase());
+
+    if (budgetNameExist) {
       Swal.fire({
         icon: 'warning',
         title: 'Oops...',
-        text: 'Budget name is already exist!',
+        text: `Budget name is ${name} already exist!`,
       })
       return;
     }
@@ -83,15 +86,15 @@ export default function Home() {
           )
         }
       })
-     
-    }else{
+
+    } else {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Something went wrong!',
       })
     }
-  
+
   }
 
 
@@ -134,10 +137,6 @@ export default function Home() {
 
   const budgetId = useSelector(getBudgetId);
   const budget = useSelector(getBudget);
-
-  // filter method  will return an array object
-  // const test = expenses.filter(expense => expense.budgetId === 'r5JOkVpPhMcyfKF16mQKF');
-  // console.log(test)
 
   return (
     <>
@@ -235,37 +234,37 @@ export default function Home() {
           <Modal.Title>New Expense</Modal.Title>
         </Modal.Header>
         <form onSubmit={addExpenseFn}>
-        <Modal.Body>
-          <div className='form-group mb-3'>
-            <label className='form-label'>Description</label>
-            <input className='form-control' type='text' ref={descRef} required />
-          </div>
-          <div className='form-group mb-3'>
-            <label className='form-label'>Amount</label>
-            <input className='form-control' type='number' ref={amountRef} required />
-          </div>
-          <div className='form-group mb-3'>
-            <label className='form-label'>Amount</label>
+          <Modal.Body>
+            <div className='form-group mb-3'>
+              <label className='form-label'>Description</label>
+              <input className='form-control' type='text' ref={descRef} required />
+            </div>
+            <div className='form-group mb-3'>
+              <label className='form-label'>Amount</label>
+              <input className='form-control' type='number' ref={amountRef} required />
+            </div>
+            <div className='form-group mb-3'>
+              <label className='form-label'>Amount</label>
 
-            <select className="form-select" defaultValue={budgetId ? budgetId : 'uncategorized'} ref={budgetIdRef}>
-              <option value='uncategorized' >Uncategorized</option>
-              {
-                budgets.map((budget => (
-                  <option key={budget.id} value={budget.id} >{budget.name}</option>
-                )))
+              <select className="form-select" defaultValue={budgetId ? budgetId : 'uncategorized'} ref={budgetIdRef}>
+                <option value='uncategorized' >Uncategorized</option>
+                {
+                  budgets.map((budget => (
+                    <option key={budget.id} value={budget.id} >{budget.name}</option>
+                  )))
 
-              }
-            </select>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" type="button" onClick={handleExpenseClose}>
-            Close
-          </Button>
-          <Button variant="primary" type="submit">
-            Add
-          </Button>
-        </Modal.Footer>
+                }
+              </select>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" type="button" onClick={handleExpenseClose}>
+              Close
+            </Button>
+            <Button variant="primary" type="submit">
+              Add
+            </Button>
+          </Modal.Footer>
         </form>
       </Modal>
 

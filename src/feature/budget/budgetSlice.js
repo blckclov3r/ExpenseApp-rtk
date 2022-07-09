@@ -4,7 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const budgetSlice = createSlice({
     name: "budget",
     initialState: {
-        budgetList: []
+        budgetList: [
+            {
+                id:"jdD8BbCHsTMdgkjzsaLVL",
+                name:"GCash",
+                max: 1000
+            }
+        ]
     },
     reducers: {
         setBudget: (state,action)=> {

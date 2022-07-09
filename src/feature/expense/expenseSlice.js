@@ -5,7 +5,14 @@ const initialState = {
     // desc: '',
     // amount: 0,
     // budgetId: null
-    expenseList: [],
+    expenseList: [
+        {
+            id: "EBHL4cfMTX_EgtYRsxrcC",
+            desc: "Load",
+            amount: 100,
+            budgetId: "jdD8BbCHsTMdgkjzsaLVL"
+        }
+    ],
     budgetId: '',
     budget: {}
 }
