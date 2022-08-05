@@ -244,7 +244,7 @@ export default function Home() {
               <input className='form-control' type='number' ref={amountRef} required />
             </div>
             <div className='form-group mb-3'>
-              <label className='form-label'>Amount</label>
+              <label className='form-label'>Budget</label>
 
               <select className="form-select" defaultValue={budgetId ? budgetId : 'uncategorized'} ref={budgetIdRef}>
                 <option value='uncategorized' >Uncategorized</option>

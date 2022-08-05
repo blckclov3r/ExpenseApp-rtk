@@ -5,8 +5,6 @@ import budgetList from '../feature/budget/budgetSlice'
 import expenseModal from '../feature/expense/modalSlice'
 import expenseList from '../feature/expense/expenseSlice'
 
-
-
 import {
     persistStore,
     persistReducer,
